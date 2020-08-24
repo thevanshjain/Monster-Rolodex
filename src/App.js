@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { CardList } from './Components/Card-list/Card-list-component';
+
 //import logo from './logo.svg';
 import './App.css';
 
@@ -6,23 +8,20 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      monster : []
+      monsters : []
     }
   }
 
   componentDidMount(){
     fetch('http://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
-    .then(users => this.setState({monster:users}))
+    .then(users => this.setState({monsters:users}))
   }
 
   render() {
     return (
       <div className="App">
-        {
-          this.state.monster.map(mon =>
-          <h1 key={mon.id}>{mon.name}</h1>)
-        }
+        <CardList monsters={this.state.monsters} /> 
       </div>
     );
   }
